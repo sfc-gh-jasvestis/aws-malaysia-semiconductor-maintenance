@@ -10,7 +10,6 @@ Malaysia's semiconductor fabs operate 120 critical tools worth RM 2 billion in c
 flowchart LR
     IOT[IoT Core] --> KIN[Kinesis]
     KIN --> SPS[Snowpipe Streaming]
-    SP --> RAW[RAW Tables]
     SPS --> RAW
     RAW --> DT[Dynamic Tables]
     DT --> ML[ML Functions]
