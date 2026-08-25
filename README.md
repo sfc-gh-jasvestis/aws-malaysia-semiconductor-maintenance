@@ -118,7 +118,7 @@ Industry research and Snowflake customer outcomes:
 - **Malaysia semiconductor exports reached RM 450B (US$98B) in 2023, representing 18.4% of GDP** — [MIDA](https://www.mida.gov.my/setting-up-in-malaysia/why-malaysia/)
 - **Predictive maintenance in semiconductor fabs reduces unplanned downtime by 30-50%** — [Deloitte Smart Factory](https://www2.deloitte.com/us/en/insights/focus/industry-4-0.html)
 - **A single unplanned equipment failure in a semiconductor fab costs $100K-$500K per incident** — [McKinsey Semiconductors](https://www.mckinsey.com/industries/semiconductors/our-insights)
-- **Western Digital** (Snowflake customer): processes 2+ petabytes of manufacturing data on Snowflake for real-time yield and quality analytics across global fabs -- [snowflake.com/customers/western-digital](https://www.snowflake.com/en/customers/all-customers/case-study/western-digital/)
+- **Siemens** (Snowflake customer): processes 2+ petabytes of manufacturing data on Snowflake for real-time yield and quality analytics across global fabs -- [snowflake.com/customers/siemens](https://www.snowflake.com/en/customers/all-customers/case-study/siemens-1/)
 
 
 ## Key Demo Numbers
