@@ -1,6 +1,6 @@
 -- ============================================================================
 -- 09_AWS_INTEGRATION.SQL — AWS services for Equipment Predictive Maintenance
--- Account: 018437500440 | Region: us-west-2
+-- Account: <YOUR_AWS_ACCOUNT_ID> | Region: us-west-2
 -- Skip this script for Snowflake-only build
 -- ============================================================================
 USE DATABASE SEMICONDUCTOR_MAINTENANCE;
@@ -72,11 +72,11 @@ CREATE OR REPLACE EXTERNAL ACCESS INTEGRATION aws_malaysia_semiconductor_mainten
   ENABLED = TRUE
   COMMENT = 'SNS access for Equipment Predictive Maintenance alerts';
 
--- SNS Topic ARN: arn:aws:sns:us-west-2:018437500440:sea-demos-aws-malaysia-semiconductor-maintenance
+-- SNS Topic ARN: arn:aws:sns:us-west-2:<YOUR_AWS_ACCOUNT_ID>:sea-demos-aws-malaysia-semiconductor-maintenance
 
 -- ==================== KINESIS / IOT CORE INGESTION ====================
 -- Snowpipe from Kinesis Data Stream
--- Stream ARN: arn:aws:kinesis:us-west-2:018437500440:stream/aws-malaysia-semiconductor-maintenance-stream
+-- Stream ARN: arn:aws:kinesis:us-west-2:<YOUR_AWS_ACCOUNT_ID>:stream/aws-malaysia-semiconductor-maintenance-stream
 
 CREATE OR REPLACE PIPE RAW.REALTIME_PIPE
   AUTO_INGEST = TRUE
