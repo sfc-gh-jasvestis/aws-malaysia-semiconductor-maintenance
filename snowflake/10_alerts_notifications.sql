@@ -8,7 +8,7 @@ USE SCHEMA APP;
 CREATE OR REPLACE NOTIFICATION INTEGRATION aws_malaysia_semiconductor_maintenance_EMAIL_INT
   TYPE = EMAIL
   ENABLED = TRUE
-  ALLOWED_RECIPIENTS = ('jonathan.asvestis@snowflake.com');
+  ALLOWED_RECIPIENTS = ('<YOUR_EMAIL>');
 
 -- Alert: EQUIPMENT_FAILURE_PREDICTED
 CREATE OR REPLACE ALERT APP.EQUIPMENT_FAILURE_PREDICTED
@@ -22,7 +22,7 @@ IF (EXISTS (
 THEN
   CALL SYSTEM$SEND_EMAIL(
     'aws_malaysia_semiconductor_maintenance_EMAIL_INT',
-    'jonathan.asvestis@snowflake.com',
+    '<YOUR_EMAIL>',
     '[ALERT] Equipment Predictive Maintenance: Equipment predicted to fail within 72 hours',
     'Equipment predicted to fail within 72 hours'
   );
@@ -41,7 +41,7 @@ IF (EXISTS (
 THEN
   CALL SYSTEM$SEND_EMAIL(
     'aws_malaysia_semiconductor_maintenance_EMAIL_INT',
-    'jonathan.asvestis@snowflake.com',
+    '<YOUR_EMAIL>',
     '[ALERT] Equipment Predictive Maintenance: Sensor reading drifting beyond critical specification',
     'Sensor reading drifting beyond critical specification'
   );
