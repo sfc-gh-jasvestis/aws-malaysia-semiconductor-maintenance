@@ -35,36 +35,36 @@ export default function HomePage() {
   const executiveCockpit = (
     <div className="space-y-6">
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <KPICard title="Total Yield %" value="RM 2.4B" status="neutral" />
-        <KPICard title="Quality Defects" value="7" status="warning" />
-        <KPICard title="Anomalies Detected" value="3" status="danger" />
-        <KPICard title="Active Fabs" value="124" status="neutral" />
+        <KPICard title="Equipment Uptime" value="96.8%" status="neutral" />
+        <KPICard title="Unplanned Downtime" value="1.2%" status="warning" />
+        <KPICard title="PM Compliance" value="98%" status="neutral" />
+        <KPICard title="Tools Managed" value="847" status="neutral" />
       </div>
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         <Chart
           data={data?.timeseries || [{ period: 'Loading', value: 0 }]}
           type="line"
           xKey="period"
-          yKeys={[{ key: 'value', name: 'Yield %' }]}
-          title="Yield % Trend (Weekly)"
+          yKeys={[{ key: 'value', name: 'Uptime %' }]}
+          title="Equipment Uptime Trend (Weekly)"
         />
         <Chart
           data={data?.categories || [{ category: 'Loading', count: 0 }]}
           type="bar"
           xKey="category"
-          yKeys={[{ key: 'count', name: 'Count' }]}
-          title="Quality Defects by Fab"
+          yKeys={[{ key: 'count', name: 'Hours' }]}
+          title="Downtime by Cause"
         />
       </div>
       <DataTable
         columns={[
-          { key: 'id', header: '#' },
-          { key: 'name', header: 'Fab' },
-          { key: 'status', header: 'Status' },
-          { key: 'value', header: 'Yield %' },
+          { key: 'id', header: 'Tool' },
+          { key: 'name', header: 'Area' },
+          { key: 'status', header: 'Health' },
+          { key: 'value', header: 'Uptime %' },
         ]}
         data={data?.entities || []}
-        title="Fab Performance"
+        title="Equipment Health Dashboard"
       />
     </div>
   );
@@ -72,16 +72,16 @@ export default function HomePage() {
   const domainTab1 = (
     <div className="space-y-6">
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-        <KPICard title="Efficiency" value="87%" />
-        <KPICard title="Utilization" value="72%" />
-        <KPICard title="Growth Rate" value="+8.4%" />
+        <KPICard title="Predicted Failures (7d)" value="4" />
+        <KPICard title="Parts at Risk" value="12" />
+        <KPICard title="Spare Coverage" value="94%" />
       </div>
       <Chart
         data={data?.detail || [{ x: 'Loading', y: 0 }]}
         type="area"
         xKey="x"
-        yKeys={[{ key: 'y', name: 'Index' }]}
-        title="Maintenance Performance Trend"
+        yKeys={[{ key: 'y', name: 'Days' }]}
+        title="Remaining Useful Life (Top 20 Tools)"
         height={400}
       />
     </div>
@@ -94,17 +94,17 @@ export default function HomePage() {
           data={data?.breakdown || [{ label: 'A', value: 30 }, { label: 'B', value: 70 }]}
           type="pie"
           xKey="label"
-          yKeys={[{ key: 'value', name: 'Score' }]}
-          title="Risk Distribution"
+          yKeys={[{ key: 'value', name: 'Yield Delta %' }]}
+          title="PM Impact on Yield"
         />
         <ActionMemo
-          persona={{ name: 'Malaysia Operations Lead', role: 'Director of Maintenance' }}
+          persona={{ name: 'Tan Keng Huat', role: 'VP Equipment Engineering' }}
           context={{}}
           onGenerate={async () => ({
             subject: 'Action Required',
             body: 'AI-generated recommendation based on current data patterns and predicted trends.',
             urgency: 'HIGH',
-            actions: ['Review top quality defects findings', 'Optimize fab allocation', 'Prepare quarterly maintenance report'],
+            actions: ['Schedule predictive PM for CVD-12 (bearing vibration increasing)', 'Order critical spare for Implanter-4 (lead time 6 weeks)', 'Investigate root cause of Litho-7 repeated alignment failures'],
           })}
         />
       </div>
@@ -116,9 +116,9 @@ export default function HomePage() {
       <AskAI
         title="Ask AI"
         sampleQuestions={[
-          'Which fabs have the highest quality defects?',
-          'Show yield % trend for the last 30 days',
-          'What is the forecast for next quarter's yield %?',
+          'Which tools are predicted to fail in the next 7 days?',
+          'Show correlation between PM adherence and yield',
+          'What is the spare parts inventory risk assessment?',
         ]}
         mode="both"
         onSubmit={async (question, mode) => {
@@ -178,8 +178,8 @@ export default function HomePage() {
 
   const tabs = [
     { id: 'executive-cockpit', label: 'Executive Cockpit', icon: '📊', content: executiveCockpit },
-    { id: 'domain-1', label: 'Maintenance Analytics', icon: '📈', content: domainTab1 },
-    { id: 'domain-2', label: 'Alerts & Actions', icon: '⚡', content: domainTab2 },
+    { id: 'domain-1', label: 'Predictive', icon: '📈', content: domainTab1 },
+    { id: 'domain-2', label: 'PM Scheduling', icon: '⚡', content: domainTab2 },
     { id: 'ask-ai', label: 'Ask AI', icon: '🤖', content: askAiTab },
     { id: 'architecture', label: 'Architecture & Data', icon: '🏗️', content: architectureTab },
   ];
