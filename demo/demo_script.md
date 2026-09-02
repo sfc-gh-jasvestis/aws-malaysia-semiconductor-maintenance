@@ -1,109 +1,82 @@
-# Demo Script: Equipment Predictive Maintenance
-## ~4-Minute Recorded Walkthrough
-**Format**: Screen recording with voiceover
-**Target**: Customer meeting / booth loop / social share
-**Narrative**: "Snowflake predicts equipment failures before they happen — IoT telemetry, ML forecasting, and automated alerts, all in one platform without external ML infrastructure"
-**Demo Mode**: Open app with `?demo=true` for presenter notes
+# Equipment Predictive Maintenance
 
----
+**Malaysia - Semiconductor & Electronics Manufacturing**
+Use case: Predictive Maintenance
 
-## Two Personas
+> Predict semiconductor tool failures 72 hours before they occur — IoT sensors stream to Snowflake, ML.FORECAST identifies degradation patterns, and alerts trigger before costly unplanned downtime.
 
-| Persona | Role | Tool | What they care about |
-|---|---|---|---|
-| **Rajesh Kumar** | Maintenance Director | React App (SPCS) | Equipment uptime, maintenance cost optimization, spare parts inventory, unplanned downtime reduction |
-| **Wong Mei Ling** | Equipment Engineer | Amazon QuickSight | Sensor drift patterns, vibration analysis, remaining useful life, corrective action history |
+## Why Snowflake
 
----
+Snowflake predicts equipment failures before they happen — IoT telemetry, ML forecasting, and automated alerts, all in one platform without external ML infrastructure
 
-## What's Built
+- **Snowpipe Streaming for IoT telemetry** - Only demo ingesting 1M sensor readings with sub-second latency directly into Snowflake
+- **ML.FORECAST for remaining useful life** - Predicts equipment failure 72 hours ahead without external SageMaker or custom models
+- **ML.ANOMALY_DETECTION for sensor drift** - Detects subtle degradation patterns that operators miss in raw sensor dashboards
+- **Alerts + Notification Integration** - Automated alerting pipeline replaces SNS — failure prediction triggers immediate notification
+- **100 maintenance documents searchable** - Equipment manuals and failure mode guides instantly queryable for corrective actions
+- **Malaysian semiconductor equipment context** - Realistic Applied Materials, ASML, Lam Research tool names and sensor parameters
 
-| Layer | Component | Detail |
+## What is deployed
+
+| | |
+|---|---|
+| Database | `MY_SEMICONDUCTOR_MAINTENANCE` |
+| Service | `MY_SEMICONDUCTOR_MAINTENANCE_APP` |
+| Compute pool | `SEA_DEMOS_MALAYSIA_POOL` |
+| Dimension table | `RAW.MAINTENANCE_DOCS` (20 rows) |
+| Fact table | `RAW.TELEMETRY` (250,000 rows, 90 days) |
+| Curated layer | `CURATED.PERFORMANCE_SUMMARY`, `CURATED.TREND_ANALYSIS`, `CURATED.KPI_SUMMARY` |
+| Currency | MYR (RM) |
+
+Regions in play: Selangor, Johor, Penang, Sabah, Sarawak
+Segments: Die Bonder, Wire Bonder, Molding Press, Test Handler
+
+Dynamic tables are created suspended and refreshed on demand:
+
+```bash
+./refresh_demo_data.sh MY_SEMICONDUCTOR_MAINTENANCE
+```
+
+## KPI cards
+
+Every card below is served live from `CURATED.KPI_SUMMARY`. The app keeps the
+original literal as a fallback, so it still renders if Snowflake is unreachable.
+
+| Card | Value | Backed by |
 |---|---|---|
-| **RAW** | 6 tables | EQUIPMENT (120), TELEMETRY (1000000), WORK_ORDERS (3000), SPARE_PARTS (500), MAINTENANCE_DOCS (100), DOWNTIME_EVENTS (800) |
-| **CURATED** | 4 Dynamic Tables | EQUIPMENT_HEALTH_SCORE, SENSOR_DRIFT_DETECTION, REMAINING_USEFUL_LIFE, MAINTENANCE_BACKLOG |
-| **ML** | ML.FORECAST + ML.ANOMALY_DETECTION | Forecasting + anomaly detection |
-| **AI** | COMPLETE, AI_CLASSIFY, SUMMARIZE | Classification + extraction |
-| **Search** | Cortex Search | 100 documents indexed |
-| **Agent** | MAINTENANCE_INTELLIGENCE_AGENT | Semantic View + Search tools |
+| Equipment Uptime | `96.8%` | average per event |
+| Unplanned Downtime | `1.2%` | average per event |
+| PM Compliance | `98%` | average per event |
+| Tools Managed | `847` | total across Maintenance Docs |
+| Predicted Failures (7d) | `4` | total across Maintenance Docs |
+| Parts at Risk | `12` | total across Maintenance Docs |
+| Spare Coverage | `94%` | average per event |
 
 
----
+## Demo flow
 
-## The Story
+1. Maintenance Overview
+2. Equipment Health
+3. Predictive Analytics
+4. Ask AI
+5. Architecture & Data
 
-Malaysia's semiconductor fabs operate 120 critical tools worth RM 2 billion in capital equipment. Unplanned downtime costs RM 12M annually — a single lithography tool failure halts an entire production line for 48+ hours. Traditional time-based maintenance either replaces parts too early (wasting RM 3M in premature replacements) or too late (causing cascading failures). The Maintenance Director needs prediction, not reaction.
+## Talking points
 
----
+- **120 critical tools** - monitored across Penang/Kulim fabs
+- **RM 12M** - annual unplanned downtime cost (US$2.8M)
+- **72-hour window** - failure prediction lead time (ML.FORECAST)
+- **8 tools** - currently in ALARM state
+- **3,000 work orders** - tracked (preventive + corrective)
+- **100 maintenance docs** - indexed and searchable via Cortex Search
 
-## Script
+## Business impact
 
-### [0:00–0:45] MAINTENANCE OVERVIEW
-
-**Show**: Maintenance Overview tab
-
-> "RM 12 million in unplanned downtime costs this year across 120 critical semiconductor tools."
-
-**Action**: Point at RM 12M downtime cost KPI
-
-### [0:45–1:30] EQUIPMENT HEALTH
-
-**Show**: Equipment Health tab
-
-> "EQ-0023 — Applied Materials etch chamber — vibration trending 2.3x above baseline over 14 days."
-
-**Action**: Click EQ-0023 in equipment list
-
-### [1:30–2:15] PREDICTIVE ANALYTICS
-
-**Show**: Predictive Analytics tab
-
-> "ML.FORECAST projects remaining useful life for all 120 tools — updated every 4 hours."
-
-**Action**: Show RUL forecast chart with confidence bands
-
-### [2:15–3:00] ASK AI
-
-**Show**: Ask AI tab
-
-> "Rajesh asks: 'Which tools should I schedule for maintenance this week?'"
-
-**Action**: Type: 'Which tools need maintenance this week?'
-
-### [3:00–3:45] ARCHITECTURE & DATA
-
-**Show**: Architecture & Data tab
-
-> "IoT Core streams 1 million sensor readings via Snowpipe Streaming — sub-second latency."
-
-**Action**: Walk through architecture diagram
-
+- Malaysia semiconductor exports reached RM 450B (US$98B) in 2023, representing 18.4% of GDP (MIDA)
+- Predictive maintenance in semiconductor fabs reduces unplanned downtime by 30-50% (Deloitte Smart Factory)
+- A single unplanned equipment failure in a semiconductor fab costs $100K-$500K per incident (McKinsey Semiconductors)
+- Yamaha Motor achieved real-time manufacturing intelligence on Snowflake (Snowflake Customers)
 
 ---
-
-## Key Demo Differentiators
-
-1. **Snowpipe Streaming for IoT telemetry** — Only demo ingesting 1M sensor readings with sub-second latency directly into Snowflake
-2. **ML.FORECAST for remaining useful life** — Predicts equipment failure 72 hours ahead without external SageMaker or custom models
-3. **ML.ANOMALY_DETECTION for sensor drift** — Detects subtle degradation patterns that operators miss in raw sensor dashboards
-4. **Alerts + Notification Integration** — Automated alerting pipeline replaces SNS — failure prediction triggers immediate notification
-5. **100 maintenance documents searchable** — Equipment manuals and failure mode guides instantly queryable for corrective actions
-6. **Malaysian semiconductor equipment context** — Realistic Applied Materials, ASML, Lam Research tool names and sensor parameters
-
-
----
-
-## Demo Prep Checklist
-
-### Data Verification
-- [ ] `SELECT COUNT(*) FROM SEMICONDUCTOR_MAINTENANCE.RAW.EQUIPMENT` → 120
-- [ ] `SELECT COUNT(*) FROM SEMICONDUCTOR_MAINTENANCE.RAW.TELEMETRY` → 1000000
-- [ ] `SELECT COUNT(*) FROM SEMICONDUCTOR_MAINTENANCE.CURATED.EQUIPMENT_HEALTH_SCORE WHERE STATUS = 'ALARM'` → 8
-
-### ML Model Verification
-- [ ] `SELECT COUNT(*) FROM SEMICONDUCTOR_MAINTENANCE.ML.RUL_FORECAST_RESULTS` → >0
-- [ ] `SELECT COUNT(*) FROM SEMICONDUCTOR_MAINTENANCE.ML.SENSOR_DRIFT_RESULTS WHERE IS_ANOMALY = TRUE` → >=5
-
-### AI/Agent Verification
-- [ ] `SELECT COUNT(*) FROM SEMICONDUCTOR_MAINTENANCE.AI.DOC_CLASSIFICATION` → 100
-
+Generated from `generator/demo_specs/aws-malaysia-semiconductor-maintenance.json`. Do not hand-edit: run
+`python3 generator/gen_repo_docs.py aws-malaysia-semiconductor-maintenance` instead.
