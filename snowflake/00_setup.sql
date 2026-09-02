@@ -1,16 +1,13 @@
--- ============================================================================
--- Equipment Predictive Maintenance
--- Predict semiconductor tool failures 72 hours before they occur — IoT sensors stream to Snowflake, ML.FORECAST identifies degradation patterns, and alerts trigger before costly unplanned downtime.
--- ============================================================================
-USE ROLE ACCOUNTADMIN;
-CREATE DATABASE IF NOT EXISTS SEMICONDUCTOR_MAINTENANCE;
-CREATE WAREHOUSE IF NOT EXISTS SEMI_WH WAREHOUSE_SIZE = 'MEDIUM' AUTO_SUSPEND = 120 AUTO_RESUME = TRUE;
-USE DATABASE SEMICONDUCTOR_MAINTENANCE;
-CREATE SCHEMA IF NOT EXISTS RAW;
-CREATE SCHEMA IF NOT EXISTS CURATED;
-CREATE SCHEMA IF NOT EXISTS ML;
-CREATE SCHEMA IF NOT EXISTS AI;
-CREATE SCHEMA IF NOT EXISTS SEARCH;
-CREATE SCHEMA IF NOT EXISTS APP;
+-- Generated from generator/demo_specs/aws-malaysia-semiconductor-maintenance.json
+-- Regenerate with: python3 generator/gen_repo_docs.py aws-malaysia-semiconductor-maintenance
+-- This is the schema that is actually deployed for MY_SEMICONDUCTOR_MAINTENANCE.
 
-USE WAREHOUSE SEMI_WH;
+-- MY_SEMICONDUCTOR_MAINTENANCE  (Equipment Predictive Maintenance)
+-- generated from generator/demo_specs/aws-malaysia-semiconductor-maintenance.json - do not hand-edit
+CREATE DATABASE IF NOT EXISTS MY_SEMICONDUCTOR_MAINTENANCE;
+CREATE SCHEMA IF NOT EXISTS MY_SEMICONDUCTOR_MAINTENANCE.RAW;
+CREATE SCHEMA IF NOT EXISTS MY_SEMICONDUCTOR_MAINTENANCE.CURATED;
+CREATE SCHEMA IF NOT EXISTS MY_SEMICONDUCTOR_MAINTENANCE.APP;
+USE DATABASE MY_SEMICONDUCTOR_MAINTENANCE;
+
+-- 5 real regions; entity names carry their region so the two always agree
