@@ -53,6 +53,7 @@ export default function HomePage() {
         <div className="lg:col-span-1">
           <GeoMap
             country="malaysia"
+            labels={{ entity: 'Areas', event: 'Telemetry', alert: 'Predicted Failures' }}
             regions={data?.regions}
             markers={[{"label": "Penang", "value": "Fab: util 92%", "color": "green", "size": "lg"}, {"label": "Kulim", "value": "Assembly: yield 94%", "color": "green", "size": "lg"}, {"label": "Kuala Lumpur", "value": "HQ & design center", "color": "blue", "size": "md"}, {"label": "Johor Bahru", "value": "Test facility", "color": "green", "size": "md"}]}
             routes={[{"from": "Penang", "to": "Kulim", "color": "#29B5E8"}]}
@@ -83,8 +84,13 @@ export default function HomePage() {
         columns={[
           { key: 'id', header: 'Tool' },
           { key: 'name', header: 'Area' },
+          { key: 'region', header: 'Region' },
           { key: 'status', header: 'Health' },
-          { key: 'value', header: 'Uptime %' },
+          { key: 'm1', header: 'Uptime %' },
+          { key: 'm2', header: 'Spare Coverage' },
+          { key: 'm3', header: 'Unplanned Downtime' },
+          { key: 'events', header: 'Telemetry' },
+          { key: 'alerts', header: 'Predicted Failures' },
         ]}
         data={data?.entities || []}
         title="Equipment Health Dashboard"
