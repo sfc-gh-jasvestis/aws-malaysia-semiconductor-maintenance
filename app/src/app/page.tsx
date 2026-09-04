@@ -53,6 +53,7 @@ export default function HomePage() {
         <div className="lg:col-span-1">
           <GeoMap
             country="malaysia"
+            regions={data?.regions}
             markers={[{"label": "Penang", "value": "Fab: util 92%", "color": "green", "size": "lg"}, {"label": "Kulim", "value": "Assembly: yield 94%", "color": "green", "size": "lg"}, {"label": "Kuala Lumpur", "value": "HQ & design center", "color": "blue", "size": "md"}, {"label": "Johor Bahru", "value": "Test facility", "color": "green", "size": "md"}]}
             routes={[{"from": "Penang", "to": "Kulim", "color": "#29B5E8"}]}
             title="Geographic Overview"
