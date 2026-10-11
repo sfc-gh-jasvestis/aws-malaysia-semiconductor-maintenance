@@ -1,0 +1,142 @@
+{
+  "title": "Semiconductor Fab Tool Predictive Maintenance",
+  "duration": "6 minutes",
+  "thesis": "Snowflake turns readings from 24 synthetic fab tools at five fictional Malaysian sites into availability KPIs, 7-day down-risk scores, vibration anomalies and grounded AI answers, all on curated dynamic tables.",
+  "tabs": [
+    {
+      "id": "executive-cockpit",
+      "persona": {
+        "name": "Nurul Aisyah Rahman",
+        "role": "VP Fab Operations (fictional)",
+        "avatar": ""
+      },
+      "talking_points": [
+        "Tool availability, unscheduled downs, mean time between downs and tools tracked across Penang, Kulim, Melaka, Ipoh and Kuching.",
+        "Every KPI is a numerator over a denominator in a curated dynamic table, so it traces back to tool-day rows.",
+        "The root-cause chart shows RF generator faults and CVD heater drift costing the most hours."
+      ],
+      "show": [
+        "KPI cards",
+        "Daily tool availability",
+        "Downtime by root cause",
+        "Fab tool table"
+      ],
+      "call_out": "One governed set of fab maintenance KPIs, traceable to source rows",
+      "transition": {
+        "next_tab": "predictive",
+        "line": "Which tools are likely to go down next?"
+      }
+    },
+    {
+      "id": "predictive",
+      "persona": {
+        "name": "Tan Wei Jie",
+        "role": "Equipment Engineer (fictional)",
+        "avatar": ""
+      },
+      "talking_points": [
+        "Snowflake ML classification scores each tool's probability of an unscheduled down in the next 7 days.",
+        "The holdout line shows precision and recall on the most recent days, against the base rate.",
+        "Anomaly detection flags pump vibration outliers per tool, and the forecast projects fab-wide downtime for 14 days."
+      ],
+      "show": [
+        "Holdout metrics",
+        "Failure risk by tool",
+        "Downtime forecast",
+        "Vibration anomalies"
+      ],
+      "call_out": "Honest, evaluated ML inside the data platform",
+      "transition": {
+        "next_tab": "planning",
+        "line": "Do we have the spares to respond?"
+      }
+    },
+    {
+      "id": "planning",
+      "persona": {
+        "name": "Tan Wei Jie",
+        "role": "Equipment Engineer (fictional)",
+        "avatar": ""
+      },
+      "talking_points": [
+        "Critical spares on order and spare coverage (RF match units, heater assemblies, capillary sets, probe cards) frame response capacity.",
+        "PM compliance against yield by tool shows where discipline and output move together; it is an association, not proof of cause.",
+        "The action memo drafts three prioritised tool actions from the KPI, downtime and risk tables only."
+      ],
+      "show": [
+        "Critical spares",
+        "PM compliance vs yield",
+        "Action memo"
+      ],
+      "call_out": "Grounded draft actions, with a human in the loop",
+      "transition": {
+        "next_tab": "live",
+        "line": "What happens when a chamber alarms right now?"
+      }
+    },
+    {
+      "id": "live",
+      "persona": {
+        "name": "Tan Wei Jie",
+        "role": "Equipment Engineer (fictional)",
+        "avatar": ""
+      },
+      "talking_points": [
+        "Live readings land in RAW.LIVE_TELEMETRY, from the simulator or from AWS IoT Core through Snowpipe.",
+        "The Snowflake alert logs ALARM readings with an SOP hint and the tool's current risk band, then emails the on-call equipment engineer."
+      ],
+      "show": [
+        "Messages loaded and lag",
+        "Latest readings",
+        "Alert log"
+      ],
+      "call_out": "From tool alarm to action in one platform",
+      "transition": {
+        "next_tab": "ask-ai",
+        "line": "Now ask the data directly."
+      }
+    },
+    {
+      "id": "ask-ai",
+      "persona": {
+        "name": "Nurul Aisyah Rahman",
+        "role": "VP Fab Operations (fictional)",
+        "avatar": ""
+      },
+      "talking_points": [
+        "The Cortex Agent uses Cortex Analyst over the semantic view for metrics, and Cortex Search over 15 synthetic fab tool SOPs.",
+        "Each answer shows the generated SQL and the SOPs it cited."
+      ],
+      "show": [
+        "Ask a sample question",
+        "Generated SQL",
+        "SOP citations"
+      ],
+      "call_out": "Natural-language answers you can audit",
+      "transition": {
+        "next_tab": "architecture",
+        "line": "Here is how it is built."
+      }
+    },
+    {
+      "id": "architecture",
+      "persona": {
+        "name": "Nurul Aisyah Rahman",
+        "role": "VP Fab Operations (fictional)",
+        "avatar": ""
+      },
+      "talking_points": [
+        "Two builds share one core: Snowflake only, or AWS + Snowflake (IoT Core, Bedrock, QuickSight and Amazon Q).",
+        "Everything shown is synthetic demo data, rebuilt reproducibly from the repo."
+      ],
+      "show": [
+        "Both architecture diagrams"
+      ],
+      "call_out": "One governed core, with an optional AWS edge",
+      "transition": {
+        "next_tab": "",
+        "line": "Questions?"
+      }
+    }
+  ]
+}
